@@ -27,8 +27,8 @@
                 android:id="@+id/rv_name"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_margin_start_20dp"
-                android:layout_marginTop="@dimen/dimen_margin_top_5dp"
+                android:layout_marginStart="@dimen/dimen_margin_20dp"
+                android:layout_marginTop="@dimen/dimen_margin_5dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Aaron Ramsey"
@@ -39,8 +39,8 @@
                 android:id="@+id/rv_number"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_margin_start_20dp"
-                android:layout_marginTop="@dimen/dimen_margin_top_5dp"
+                android:layout_marginStart="@dimen/dimen_margin_20dp"
+                android:layout_marginTop="@dimen/dimen_margin_5dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="574747452"
@@ -57,16 +57,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="@dimen/dimen_margin_top_10dp"
-                android:layout_marginEnd="@dimen/dimen_margin_end_10dp"
+                android:layout_marginTop="@dimen/dimen_margin_10dp"
+                android:layout_marginEnd="@dimen/dimen_margin_10dp"
                 android:src="@drawable/call" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="@dimen/dimen_margin_top_10dp"
-                android:layout_marginEnd="@dimen/dimen_margin_end_10dp"
+                android:layout_marginTop="@dimen/dimen_margin_10dp"
+                android:layout_marginEnd="@dimen/dimen_margin_10dp"
                 android:src="@drawable/message" />
         </LinearLayout>
 
@@ -75,7 +75,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_marginTop="@dimen/dimen_margin_top_10dp"
+        android:layout_marginTop="@dimen/dimen_margin_10dp"
         android:background="@color/rv_view_color"
 
         />

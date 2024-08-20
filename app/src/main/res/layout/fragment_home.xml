@@ -31,7 +31,7 @@
         android:id="@+id/rv_contact"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/dimen_margin_vertical_20dp"
+        android:layout_marginVertical="@dimen/dimen_margin_20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_add_contact"
         app:layout_constraintTop_toBottomOf="@id/toolbar_contact" />
 
@@ -39,8 +39,8 @@
         android:id="@+id/btn_add_contact"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginEnd="@dimen/dimen_margin_end_20dp"
-        android:layout_marginBottom="@dimen/dimen_margin_bottom_20dp"
+        android:layout_marginEnd="@dimen/dimen_margin_20dp"
+        android:layout_marginBottom="@dimen/dimen_margin_20dp"
         android:background="@drawable/float_drawable"
         android:drawableStart="@drawable/add"
         android:padding="@dimen/dimen_padding_8dp"

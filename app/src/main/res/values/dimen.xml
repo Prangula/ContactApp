@@ -3,19 +3,12 @@
     <dimen name="dimen_21sp">21sp</dimen>
     <dimen name="dimen_24sp">24sp</dimen>
 
-    <dimen name="dimen_margin_vertical_20dp">20dp</dimen>
-    <dimen name="dimen_margin_horizontal_20dp">20dp</dimen>
+    <dimen name="dimen_margin_5dp">5dp</dimen>
+    <dimen name="dimen_margin_10dp">10dp</dimen>
+    <dimen name="dimen_margin_20dp">20dp</dimen>
+    <dimen name="dimen_margin_40dp">40dp</dimen>
     <dimen name="dimen_margin_horizontal_120dp">120dp</dimen>
-    <dimen name="dimen_margin_end_20dp">20dp</dimen>
-    <dimen name="dimen_margin_end_10dp">10dp</dimen>
-    <dimen name="dimen_margin_end_40dp">40dp</dimen>
-    <dimen name="dimen_margin_start_20dp">20dp</dimen>
-    <dimen name="dimen_margin_bottom_20dp">20dp</dimen>
-    <dimen name="dimen_margin_top_40dp">40dp</dimen>
-    <dimen name="dimen_margin_top_20dp">20dp</dimen>
-    <dimen name="dimen_margin_top_10dp">10dp</dimen>
-    <dimen name="dimen_margin_top_5dp">5dp</dimen>
+
     <dimen name="dimen_padding_8dp">8dp</dimen>
     <dimen name="dimen_padding_16dp">16dp</dimen>
-    <dimen name="dimen_padding_start_20dp">20dp</dimen>
 </resources>

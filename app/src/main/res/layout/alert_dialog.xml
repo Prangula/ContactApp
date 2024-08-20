@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_margin_horizontal_20dp"
+        android:layout_marginHorizontal="@dimen/dimen_margin_20dp"
         android:backgroundTint="@color/toolbar_color"
         app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,8 +25,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dimen_margin_horizontal_20dp"
-                android:layout_marginTop="@dimen/dimen_margin_top_40dp"
+                android:layout_marginHorizontal="@dimen/dimen_margin_20dp"
+                android:layout_marginTop="@dimen/dimen_margin_40dp"
                 android:fontFamily="@font/scada"
                 android:gravity="center"
                 android:text="@string/do_you_want_to_delete"
@@ -37,8 +37,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dimen_margin_horizontal_20dp"
-                android:layout_marginTop="@dimen/dimen_margin_top_20dp"
+                android:layout_marginHorizontal="@dimen/dimen_margin_20dp"
+                android:layout_marginTop="@dimen/dimen_margin_20dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/scada"
                 android:gravity="center"
@@ -50,13 +50,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:layout_marginTop="@dimen/dimen_margin_top_40dp"
+                android:layout_marginTop="@dimen/dimen_margin_40dp"
                 android:background="@color/red" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dimen_margin_vertical_20dp"
+                android:layout_marginVertical="@dimen/dimen_margin_20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -64,7 +64,7 @@
                     android:id="@+id/yes_alert"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dimen_margin_end_40dp"
+                    android:layout_marginEnd="@dimen/dimen_margin_40dp"
                     android:gravity="center"
                     android:text="@string/yes"
                     android:textColor="@color/red"
