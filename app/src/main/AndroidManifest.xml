@@ -13,15 +13,7 @@
         android:theme="@style/Theme.ContactApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.ui.EditContactActivity"
-            android:theme="@style/Theme.ContactApp.NoActionBar"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.AddContactActivity"
-            android:theme="@style/Theme.ContactApp.NoActionBar"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.ContactActivity"
+            android:name=".presentation.screen.ContactActivity"
             android:exported="true"
             android:theme="@style/Theme.ContactApp.NoActionBar">
             <intent-filter>

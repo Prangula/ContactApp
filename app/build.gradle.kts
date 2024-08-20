@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("androidx.navigation.safeargs")
 
 }
 
@@ -66,6 +67,17 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
     implementation( "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
 
+
+    // Fragment KTX for viewModels() delegate
+    implementation ("androidx.fragment:fragment-ktx:1.7.1")
+
+    implementation ("com.google.android.material:material:1.9.0") // Check for the latest version
+
+    // Fragments
+    val nav_version = "2.7.7"
+
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
