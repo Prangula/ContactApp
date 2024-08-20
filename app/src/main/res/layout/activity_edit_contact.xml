@@ -11,93 +11,89 @@
         android:id="@+id/toolbar_edit_contact"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:title=" "
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/toolbar_color"
-        >
+        android:title=" "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:fontFamily="@font/scada"
-            android:textSize="@dimen/dimen_21sp"
-            android:textStyle="bold"
             android:layout_gravity="center"
+            android:fontFamily="@font/scada"
             android:text="@string/edit_contact"
-            />
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_21sp"
+            android:textStyle="bold" />
     </Toolbar>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/et_drawable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/et_input2_edit_contact"
-        android:layout_marginBottom="@dimen/dimen_margin_bottom_20dp"
         android:layout_marginHorizontal="@dimen/dimen_margin_horizontal_20dp"
+        android:layout_marginBottom="@dimen/dimen_margin_bottom_20dp"
+        android:background="@drawable/et_drawable"
         android:paddingVertical="@dimen/dimen_padding_8dp"
-        >
+        app:layout_constraintBottom_toTopOf="@id/et_input2_edit_contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
         <android.widget.EditText
             android:id="@+id/et_name_edit_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:maxLines="1"
             android:ellipsize="end"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_18sp"
+            android:fontFamily="@font/scada"
+            android:maxLines="1"
             android:padding="@dimen/dimen_padding_8dp"
             android:paddingStart="@dimen/dimen_padding_start_20dp"
-            android:fontFamily="@font/scada"
-            />
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_input2_edit_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/et_drawable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginHorizontal="@dimen/dimen_margin_horizontal_20dp"
+        android:background="@drawable/et_drawable"
         android:paddingVertical="@dimen/dimen_padding_8dp"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <android.widget.EditText
             android:id="@+id/et_number_edit_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:maxLines="1"
             android:ellipsize="end"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_18sp"
+            android:fontFamily="@font/scada"
+            android:maxLines="1"
             android:padding="@dimen/dimen_padding_8dp"
             android:paddingStart="@dimen/dimen_padding_start_20dp"
-            android:fontFamily="@font/scada"
-            />
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <android.widget.Button
         android:id="@+id/btn_plus_save_contact"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_input2_edit_contact"
         android:layout_marginTop="@dimen/dimen_margin_top_40dp"
         android:layout_marginEnd="@dimen/dimen_margin_end_20dp"
         android:background="@drawable/btn_drawable"
         android:drawableStart="@drawable/save_drawable"
-        android:textSize="@dimen/dimen_24sp"
         android:fontFamily="@font/scada"
+        android:paddingStart="@dimen/dimen_padding_start_20dp"
         android:text="@string/save"
         android:textAllCaps="false"
-        android:paddingStart="@dimen/dimen_padding_start_20dp"
         android:textColor="@color/add_contact_color"
-        />
+        android:textSize="@dimen/dimen_24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_input2_edit_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
