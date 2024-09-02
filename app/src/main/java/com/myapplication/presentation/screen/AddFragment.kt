@@ -41,30 +41,23 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         val factory = InsertViewModelFactory(insertUseCase)
         viewModel = ViewModelProvider(requireActivity(), factory).get(InsertViewModel::class.java)
 
-        binding.btnPlusAddContact.setOnClickListener {
-
-            lifecycleScope.launch {
-
-                val name = binding.etNameAddContact.text.toString()
-                val number = binding.etNumberAddContact.text.toString()
-
-                if(name.isNotEmpty() && number.isNotEmpty()){
-                    delay(1000)
-                    val item = ContactItem(name,number)
-                    viewModel.insert(item)
-
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.navHostFragment,HomeFragment())
-                        .commit()
-
-                }
-            }
-
-
-
-        }
-
-
+        insert()
     }
 
+    private fun insert() {
+        binding.btnPlusAddContact.setOnClickListener {
+            lifecycleScope.launch {
+                val name = binding.etNameAddContact.text.toString()
+                val number = binding.etNumberAddContact.text.toString()
+                if (name.isNotEmpty() && number.isNotEmpty()) {
+                    delay(1000)
+                    val item = ContactItem(name, number)
+                    viewModel.insert(item)
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.navHostFragment, HomeFragment())
+                        .commit()
+                }
+            }
+        }
+    }
 }
