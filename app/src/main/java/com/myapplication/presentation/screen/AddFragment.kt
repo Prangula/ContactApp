@@ -1,9 +1,11 @@
 package com.myapplication.presentation.screen
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -50,12 +52,35 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 val name = binding.etNameAddContact.text.toString()
                 val number = binding.etNumberAddContact.text.toString()
                 if (name.isNotEmpty() && number.isNotEmpty()) {
-                    delay(1000)
                     val item = ContactItem(name, number)
                     viewModel.insert(item)
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.navHostFragment, HomeFragment())
                         .commit()
+                } else {
+                    binding.etInput1AddContact.background =
+                        ContextCompat.getDrawable(
+                            requireActivity(),
+                            R.drawable.et_drawable_red
+                        )
+                    binding.etInput2AddContact.background =
+                        ContextCompat.getDrawable(
+                            requireActivity(),
+                            R.drawable.et_drawable_red
+                        )
+                    lifecycleScope.launch {
+                        delay(1500)
+                        binding.etInput1AddContact.background =
+                            ContextCompat.getDrawable(
+                                requireActivity(),
+                                R.drawable.et_drawable
+                            )
+                        binding.etInput2AddContact.background =
+                            ContextCompat.getDrawable(
+                                requireActivity(),
+                                R.drawable.et_drawable
+                            )
+                    }
                 }
             }
         }

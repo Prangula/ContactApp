@@ -73,6 +73,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/scada"
             android:maxLines="1"
+            android:inputType="number"
             android:padding="@dimen/dimen_padding_8dp"
             android:paddingStart="@dimen/dimen_margin_20dp"
             android:textColor="@color/black"

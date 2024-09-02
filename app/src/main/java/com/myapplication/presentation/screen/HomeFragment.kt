@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +29,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var adapter: ContactsAdapter
     private lateinit var viewModel: ContactsViewModel
     private val items: ArrayList<ContactItem> = ArrayList()
-    private var contactItem = ContactItem()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +51,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         observer()
         navigateToAddFragment()
         navigateToEditFragment()
-        deleteDialog(contactItem)
+        deleteDialog()
     }
 
     private fun rvContacts(items: ArrayList<ContactItem>) {
@@ -62,7 +60,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.rvContact.apply {
             layoutManager = LinearLayoutManager(requireActivity())
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -72,6 +69,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 items.clear()
                 items.addAll(item)
                 adapter.notifyDataSetChanged()
+                if (items.size > 0) {
+                    binding.rvContact.visibility = View.VISIBLE
+                    binding.noContacts.visibility = View.GONE
+                } else {
+                    binding.rvContact.visibility = View.GONE
+                    binding.noContacts.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -81,7 +85,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.navHostFragment, AddFragment())
                 .commit()
-
         }
     }
 
@@ -98,7 +101,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun deleteDialog(contactItem: ContactItem) {
+    private fun deleteDialog() {
 
         val database = ContactDatabase(requireActivity())
         val repositoryImpl = ContactRepositoryImpl(database)
@@ -107,7 +110,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val deleteViewModel =
             ViewModelProvider(requireActivity(), factory).get(DeleteViewModel::class.java)
 
-        adapter.setOnLongItemClickListener { item->
+        adapter.setOnLongItemClickListener { item ->
             val dialog = Dialog(requireActivity())
             dialog.setContentView(R.layout.alert_dialog)
             dialog.setCancelable(false)
