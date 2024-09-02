@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 
@@ -52,26 +56,26 @@ dependencies {
 
     val room_version = "2.5.2"
 
-    implementation ("androidx.room:room-runtime:$room_version")
-    annotationProcessor ("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
 
 
     // Koin components
-    implementation( "io.insert-koin:koin-android:3.3.0")
-    implementation ("io.insert-koin:koin-core:3.3.0")
+    implementation("io.insert-koin:koin-android:3.3.0")
+    implementation("io.insert-koin:koin-core:3.3.0")
 
     // Coroutines LifeCycle
     val coroutineVersion = "1.3.9"
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
-    implementation( "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
 
 
     // Fragment KTX for viewModels() delegate
-    implementation ("androidx.fragment:fragment-ktx:1.7.1")
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
 
-    implementation ("com.google.android.material:material:1.9.0") // Check for the latest version
+    implementation("com.google.android.material:material:1.9.0") // Check for the latest version
 
     // Fragments
     val nav_version = "2.7.7"
@@ -81,7 +85,7 @@ dependencies {
 
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
-
+    implementation(kotlin("script-runtime"))
 
 
 }
