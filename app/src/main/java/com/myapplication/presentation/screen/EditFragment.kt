@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.myapplication.R
@@ -16,7 +15,6 @@ import com.myapplication.databinding.FragmentEditBinding
 import com.myapplication.domain.use_cases.UpdateUseCase
 import com.myapplication.presentation.viewmodel.UpdateViewModel
 import com.myapplication.presentation.viewmodel.UpdateViewModelFactory
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class EditFragment : Fragment(R.layout.fragment_edit) {

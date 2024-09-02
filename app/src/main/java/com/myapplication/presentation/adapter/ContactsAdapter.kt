@@ -1,10 +1,8 @@
 package com.myapplication.presentation.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.myapplication.R
 import com.myapplication.data.database.ContactItem
 import com.myapplication.databinding.RvItemBinding
 
