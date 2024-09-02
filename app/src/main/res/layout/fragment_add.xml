@@ -37,12 +37,12 @@
         android:paddingVertical="@dimen/dimen_padding_8dp"
         android:textColorHint="@color/text_hint_color"
         app:hintTextColor="@color/text_hint_color"
-        app:layout_constraintBottom_toTopOf="@id/et_input2_edit_contact"
+        app:layout_constraintBottom_toTopOf="@id/et_input2_add_contact"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <android.widget.EditText
-            android:id="@+id/et_name_edit_contact"
+            android:id="@+id/et_name_add_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -57,7 +57,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_input2_edit_contact"
+        android:id="@+id/et_input2_add_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_margin_20dp"
@@ -71,7 +71,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.widget.EditText
-            android:id="@+id/et_number_edit_contact"
+            android:id="@+id/et_number_add_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -80,13 +80,14 @@
             android:hint="@string/number_hint"
             android:maxLines="1"
             android:padding="@dimen/dimen_padding_8dp"
+            android:inputType="number"
             android:paddingStart="@dimen/dimen_margin_20dp"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen_18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <android.widget.Button
-        android:id="@+id/btn_plus_save_contact"
+        android:id="@+id/btn_plus_add_contact"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_margin_40dp"
@@ -100,6 +101,6 @@
         android:textColor="@color/add_contact_color"
         android:textSize="@dimen/dimen_24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_input2_edit_contact" />
+        app:layout_constraintTop_toBottomOf="@id/et_input2_add_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

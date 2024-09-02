@@ -13,6 +13,10 @@ class ContactsViewModel(private val contactsUseCase: ContactsUseCase) : ViewMode
     private val _contacts = MutableStateFlow<List<ContactItem>>(emptyList())
     val contacts = _contacts.asStateFlow()
 
+    init {
+        getAllContacts()
+    }
+
     fun getAllContacts() {
         viewModelScope.launch {
             contactsUseCase().collect { item ->

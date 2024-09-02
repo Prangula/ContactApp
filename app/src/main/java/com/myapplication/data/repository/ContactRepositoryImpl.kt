@@ -12,7 +12,7 @@ class ContactRepositoryImpl(private val db: ContactDatabase) {
     suspend fun update(contactItem: ContactItem) =
         db.contactDao().update(contactItem)
 
-    suspend fun getAllContacts() =
+    fun getAllContacts() =
         db.contactDao().getAllContacts()
-    }
+}
 
