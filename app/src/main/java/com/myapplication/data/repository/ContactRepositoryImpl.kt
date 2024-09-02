@@ -12,6 +12,10 @@ class ContactRepositoryImpl(private val db: ContactDatabase) {
     suspend fun update(contactItem: ContactItem) =
         db.contactDao().update(contactItem)
 
+    suspend fun delete(contactItem: ContactItem) {
+        db.contactDao().delete(contactItem)
+    }
+
     fun getAllContacts() =
         db.contactDao().getAllContacts()
 }

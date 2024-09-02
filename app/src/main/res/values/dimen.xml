@@ -4,6 +4,8 @@
     <dimen name="dimen_24sp">24sp</dimen>
 
     <dimen name="dimen_margin_5dp">5dp</dimen>
+    <dimen name="dimen_margin_6dp">6dp</dimen>
+    <dimen name="dimen_margin_8dp">8dp</dimen>
     <dimen name="dimen_margin_10dp">10dp</dimen>
     <dimen name="dimen_margin_20dp">20dp</dimen>
     <dimen name="dimen_margin_40dp">40dp</dimen>

@@ -17,7 +17,7 @@ class ContactsViewModel(private val contactsUseCase: ContactsUseCase) : ViewMode
         getAllContacts()
     }
 
-    fun getAllContacts() {
+    private fun getAllContacts() {
         viewModelScope.launch {
             contactsUseCase().collect { item ->
                 _contacts.value = item

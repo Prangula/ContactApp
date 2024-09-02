@@ -28,19 +28,27 @@ class ContactsAdapter(private val items: List<ContactItem>) :
             rvName.text = item.name
             rvNumber.text = item.number
         }
-        holder.itemView.apply {
-            setOnClickListener {
-                onItemClickListener?.let {
-                    it(item)
-                }
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(item)
             }
+        }
+        holder.itemView.setOnLongClickListener {
+            onItemLongClickListener?.let {
+                it(item)
+            }
+            true
         }
     }
 
     private var onItemClickListener: ((ContactItem) -> Unit)? = null
+    private var onItemLongClickListener: ((ContactItem) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (ContactItem) -> Unit) {
         onItemClickListener = listener
     }
 
+    fun setOnLongItemClickListener(listener: (ContactItem) -> Unit) {
+        onItemLongClickListener = listener
+    }
 }
