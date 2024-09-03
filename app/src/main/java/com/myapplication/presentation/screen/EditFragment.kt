@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.myapplication.R
-import com.myapplication.data.database.ContactDatabase
-import com.myapplication.data.database.ContactItem
+import com.myapplication.data.database.database.ContactDatabase
+import com.myapplication.data.database.entity.ContactEntity
 import com.myapplication.data.repository.ContactRepositoryImpl
 import com.myapplication.databinding.FragmentEditBinding
 import com.myapplication.domain.use_cases.UpdateUseCase
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class EditFragment : Fragment(R.layout.fragment_edit) {
     private lateinit var binding: FragmentEditBinding
     private lateinit var viewModel: UpdateViewModel
-    private lateinit var contactItem: ContactItem
+    private lateinit var contactItem: ContactEntity
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +39,9 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         val factory = UpdateViewModelFactory(updateUseCase)
         viewModel = ViewModelProvider(requireActivity(), factory).get(UpdateViewModel::class.java)
 
-        contactItem = requireArguments().getParcelable<ContactItem>("contactItem")!!
+        contactItem = requireArguments().getParcelable<ContactEntity>("contactItem")!!
         binding.etNameEditContact.setText(contactItem!!.name)
         binding.etNumberEditContact.setText(contactItem.number)
-
         update()
 
     }
@@ -55,7 +54,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                 if (name == contactItem.name && number == contactItem.number) {
                     navigateToHomeFragment()
                 } else if (name.isNotEmpty() && number.isNotEmpty()) {
-                    val item = ContactItem(name, number, id = contactItem.id)
+                    val item = ContactEntity(name, number, id = contactItem.id)
                     viewModel.update(item)
                     navigateToHomeFragment()
                 }

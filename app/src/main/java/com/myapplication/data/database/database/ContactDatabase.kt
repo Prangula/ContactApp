@@ -1,13 +1,15 @@
-package com.myapplication.data.database
+package com.myapplication.data.database.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.myapplication.data.database.dao.ContactDao
+import com.myapplication.data.database.entity.ContactEntity
 import com.myapplication.data.database.typeconverter.DateConverter
 
-@Database(entities = [ContactItem::class], version = 1)
+@Database(entities = [ContactEntity::class], version = 1)
 @TypeConverters(DateConverter::class)
 abstract class ContactDatabase : RoomDatabase() {
 

@@ -1,18 +1,17 @@
 package com.myapplication.data.repository
 
-import com.myapplication.data.database.ContactDatabase
-import com.myapplication.data.database.ContactItem
-import kotlinx.coroutines.flow.Flow
+import com.myapplication.data.database.database.ContactDatabase
+import com.myapplication.data.database.entity.ContactEntity
 
 class ContactRepositoryImpl(private val db: ContactDatabase) {
 
-    suspend fun insert(contactItem: ContactItem) =
+    suspend fun insert(contactItem: ContactEntity) =
         db.contactDao().insert(contactItem)
 
-    suspend fun update(contactItem: ContactItem) =
+    suspend fun update(contactItem: ContactEntity) =
         db.contactDao().update(contactItem)
 
-    suspend fun delete(contactItem: ContactItem) {
+    suspend fun delete(contactItem: ContactEntity) {
         db.contactDao().delete(contactItem)
     }
 

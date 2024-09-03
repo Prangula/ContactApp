@@ -3,10 +3,10 @@ package com.myapplication.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.myapplication.data.database.ContactItem
+import com.myapplication.data.database.entity.ContactEntity
 import com.myapplication.databinding.RvItemBinding
 
-class ContactsAdapter(private val items: List<ContactItem>) :
+class ContactsAdapter(private val items: List<ContactEntity>) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -39,14 +39,14 @@ class ContactsAdapter(private val items: List<ContactItem>) :
         }
     }
 
-    private var onItemClickListener: ((ContactItem) -> Unit)? = null
-    private var onItemLongClickListener: ((ContactItem) -> Unit)? = null
+    private var onItemClickListener: ((ContactEntity) -> Unit)? = null
+    private var onItemLongClickListener: ((ContactEntity) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (ContactItem) -> Unit) {
+    fun setOnItemClickListener(listener: (ContactEntity) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun setOnLongItemClickListener(listener: (ContactItem) -> Unit) {
+    fun setOnLongItemClickListener(listener: (ContactEntity) -> Unit) {
         onItemLongClickListener = listener
     }
 }

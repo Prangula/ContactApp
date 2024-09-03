@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.myapplication.R
-import com.myapplication.data.database.ContactDatabase
-import com.myapplication.data.database.ContactItem
+import com.myapplication.data.database.database.ContactDatabase
+import com.myapplication.data.database.entity.ContactEntity
 import com.myapplication.data.repository.ContactRepositoryImpl
 import com.myapplication.databinding.FragmentAddBinding
 import com.myapplication.domain.use_cases.InsertUseCase
@@ -51,7 +51,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 val name = binding.etNameAddContact.text.toString()
                 val number = binding.etNumberAddContact.text.toString()
                 if (name.isNotEmpty() && number.isNotEmpty()) {
-                    val item = ContactItem(name, number)
+                    val item = ContactEntity(name, number)
                     viewModel.insert(item)
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.navHostFragment, HomeFragment())

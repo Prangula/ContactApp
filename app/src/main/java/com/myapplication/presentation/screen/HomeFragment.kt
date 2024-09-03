@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
-import com.myapplication.data.database.ContactDatabase
-import com.myapplication.data.database.ContactItem
+import com.myapplication.data.database.database.ContactDatabase
+import com.myapplication.data.database.entity.ContactEntity
 import com.myapplication.data.repository.ContactRepositoryImpl
 import com.myapplication.databinding.FragmentHomeBinding
 import com.myapplication.domain.use_cases.ContactsUseCase
@@ -28,7 +28,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: ContactsAdapter
     private lateinit var viewModel: ContactsViewModel
-    private val items: ArrayList<ContactItem> = ArrayList()
+    private val items: ArrayList<ContactEntity> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +54,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         deleteDialog()
     }
 
-    private fun rvContacts(items: ArrayList<ContactItem>) {
+    private fun rvContacts(items: ArrayList<ContactEntity>) {
         adapter = ContactsAdapter(items)
         binding.rvContact.adapter = adapter
         binding.rvContact.apply {
