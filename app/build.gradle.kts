@@ -3,10 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("androidx.navigation.safeargs")
     kotlin("kapt")
-    id ("kotlin-parcelize")
-
+    id("kotlin-parcelize")
 }
-
 android {
     namespace = "com.myapplication"
     compileSdk = 34
@@ -40,10 +38,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
 }
-
-
 
 dependencies {
 
@@ -56,15 +51,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    val room_version = "2.5.2"
-
-    implementation("androidx.room:room-runtime:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     // Koin components
     implementation("io.insert-koin:koin-android:3.3.0")
-    implementation("io.insert-koin:koin-core:3.3.0")
 
     // Coroutines LifeCycle
     val coroutineVersion = "1.3.9"
@@ -73,21 +66,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
 
-
     // Fragment KTX for viewModels() delegate
     implementation("androidx.fragment:fragment-ktx:1.7.1")
-
     implementation("com.google.android.material:material:1.9.0") // Check for the latest version
 
     // Fragments
     val nav_version = "2.7.7"
-
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-
-
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation(kotlin("script-runtime"))
-
-
 }
