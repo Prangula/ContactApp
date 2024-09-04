@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
 import com.myapplication.databinding.FragmentContactsBinding
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
-import com.myapplication.presentation.screen.insertScreen.ui.InsertFragment
-import com.myapplication.presentation.screen.updateScreen.ui.UpdateFragment
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
 import com.myapplication.presentation.screen.deleteVm.DeleteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,29 +62,20 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
 
     private fun navigateToAddFragment() {
         binding.btnAddContact.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.navHostFragment, InsertFragment())
-                .commit()
+            val action = ContactsFragmentDirections.actionHomeFragmentToAddFragment()
+            findNavController().navigate(action)
         }
     }
 
     private fun navigateToEditFragment() {
-        adapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putParcelable("contactItem", it)
-            }
-            val updateFragment = UpdateFragment()
-            updateFragment.arguments = bundle
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.navHostFragment, updateFragment)
-                .commit()
+        adapter.setOnItemClickListener { items ->
+            val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
+            findNavController().navigate(action)
         }
     }
 
     private fun deleteDialog() {
-
         val deleteViewModel by viewModel<DeleteViewModel>()
-
         adapter.setOnLongItemClickListener { item ->
             val dialog = Dialog(requireActivity())
             dialog.setContentView(R.layout.alert_dialog)
