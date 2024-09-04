@@ -17,6 +17,7 @@ class ContactsAdapter : ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(D
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        // ეს აქ უნდა ჩამესვა?
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
                 it(item)
@@ -27,16 +28,6 @@ class ContactsAdapter : ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(D
                 it(item)
             }
             true
-        }
-    }
-
-    class ViewHolder(binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val name = binding.rvName
-        private val number = binding.rvNumber
-
-        fun bind(item: ContactEntity) {
-            name.text = item.name
-            number.text = item.number
         }
     }
 
@@ -59,5 +50,15 @@ class ContactsAdapter : ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(D
 
     fun setOnLongItemClickListener(listener: (ContactEntity) -> Unit) {
         onItemLongClickListener = listener
+    }
+
+    class ViewHolder(binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        val name = binding.rvName
+        private val number = binding.rvNumber
+
+        fun bind(item: ContactEntity) {
+            name.text = item.name
+            number.text = item.number
+        }
     }
 }

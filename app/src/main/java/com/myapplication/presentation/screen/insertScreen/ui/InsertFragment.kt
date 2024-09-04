@@ -43,8 +43,7 @@ class InsertFragment : Fragment(R.layout.fragment_insert) {
                     if (name.isNotEmpty() && number.isNotEmpty()) {
                         val item = ContactEntity(name, number)
                         viewModel.insert(item)
-                        val action = InsertFragmentDirections.actionAddFragmentToHomeFragment()
-                        findNavController().navigate(action)
+                        findNavController().popBackStack(R.id.homeFragment, false)
                     } else {
                         viewModel.insertError(
                             etInput1AddContact,

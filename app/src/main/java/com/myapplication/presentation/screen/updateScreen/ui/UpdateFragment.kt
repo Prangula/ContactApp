@@ -56,7 +56,6 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
     }
 
     private fun navigateToHomeFragment() {
-        val action = UpdateFragmentDirections.actionEditFragmentToHomeFragment()
-        findNavController().navigate(action)
+        findNavController().popBackStack(R.id.homeFragment, false)
     }
 }
