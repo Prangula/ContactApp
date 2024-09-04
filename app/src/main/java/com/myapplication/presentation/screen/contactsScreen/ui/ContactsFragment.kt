@@ -56,17 +56,7 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
         lifecycleScope.launchWhenStarted {
             viewModel.contacts.collect { item ->
                 adapter.submitList(item)
-                adapter.notifyDataSetChanged()
-                /*
-                if (items.size > 0) {
-                    binding.rvContact.visibility = View.VISIBLE
-                    binding.noContacts.visibility = View.GONE
-                } else {
-                    binding.rvContact.visibility = View.GONE
-                    binding.noContacts.visibility = View.VISIBLE
-                }
-
-                 */
+                viewModel.rvVisibility(binding.rvContact, binding.noContacts)
             }
         }
     }
