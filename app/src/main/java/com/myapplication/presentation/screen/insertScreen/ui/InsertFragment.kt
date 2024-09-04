@@ -49,29 +49,13 @@ class InsertFragment : Fragment(R.layout.fragment_insert) {
                             .replace(R.id.navHostFragment, ContactsFragment())
                             .commit()
                     } else {
-                        etInput1AddContact.background =
-                            ContextCompat.getDrawable(
-                                requireActivity(),
-                                R.drawable.et_drawable_red
-                            )
-                        etInput2AddContact.background =
-                            ContextCompat.getDrawable(
-                                requireActivity(),
-                                R.drawable.et_drawable_red
-                            )
-                        lifecycleScope.launch {
-                            delay(1500)
-                            etInput1AddContact.background =
-                                ContextCompat.getDrawable(
-                                    requireActivity(),
-                                    R.drawable.et_drawable
-                                )
-                            etInput2AddContact.background =
-                                ContextCompat.getDrawable(
-                                    requireActivity(),
-                                    R.drawable.et_drawable
-                                )
-                        }
+                        viewModel.insertError(
+                            etInput1AddContact,
+                            etInput2AddContact,
+                            R.drawable.et_drawable_red,
+                            R.drawable.et_drawable,
+                            requireActivity()
+                        )
                     }
                 }
             }
