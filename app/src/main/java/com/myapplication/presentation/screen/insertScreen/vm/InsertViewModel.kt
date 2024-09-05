@@ -1,13 +1,10 @@
 package com.myapplication.presentation.screen.insertScreen.vm
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.textfield.TextInputLayout
-import com.myapplication.R
 import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.domain.usecase.insertUseCase.useCase.InsertUseCase
 import kotlinx.coroutines.delay
