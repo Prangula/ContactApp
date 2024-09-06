@@ -6,15 +6,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.textfield.TextInputLayout
 import com.myapplication.data.local.entity.ContactEntity
-import com.myapplication.domain.usecase.insertUseCase.useCase.InsertUseCase
+import com.myapplication.domain.usecase.insertUseCase.InsertUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class InsertViewModel(private val insertUseCase: InsertUseCase) :
-    ViewModel() {
+class InsertViewModel(
+    private val insertUseCase: InsertUseCase,
+    //private val contactDao: ContactDao
+) : ViewModel() {
 
     fun insert(contactEntity: ContactEntity) {
         viewModelScope.launch {
+            /*
+            val count = contactDao.avoidDuplication(contactEntity.name, contactEntity.number)
+            if (count != 0) {
+            }
+             */
             insertUseCase(contactEntity)
         }
     }

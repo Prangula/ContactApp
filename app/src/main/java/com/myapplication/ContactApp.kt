@@ -1,7 +1,8 @@
-package com.myapplication.di.app
+package com.myapplication
 
 import android.app.Application
 import com.myapplication.di.databaseModule.databaseModule
+import com.myapplication.di.mapperModule.mapperModule
 import com.myapplication.di.repositoryModule.repositoryModule
 import com.myapplication.di.useCaseModule.useCaseModule
 import com.myapplication.di.viewModelModule.viewModelModule
@@ -14,7 +15,7 @@ class ContactApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@ContactApp)
-            modules(databaseModule, repositoryModule, useCaseModule, viewModelModule)
+            modules(databaseModule, repositoryModule, useCaseModule, viewModelModule, mapperModule)
         }
     }
 }

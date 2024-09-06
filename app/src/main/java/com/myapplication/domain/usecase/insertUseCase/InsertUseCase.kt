@@ -1,4 +1,4 @@
-package com.myapplication.domain.usecase.insertUseCase.useCase
+package com.myapplication.domain.usecase.insertUseCase
 
 import com.myapplication.data.local.entity.ContactEntity
 

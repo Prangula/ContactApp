@@ -4,8 +4,8 @@ import com.myapplication.domain.usecase.contactsUseCase.useCase.ContactsUseCase
 import com.myapplication.domain.usecase.contactsUseCase.useCaseImpl.ContactsUseCaseImpl
 import com.myapplication.domain.usecase.deleteUseCase.useCase.DeleteUseCase
 import com.myapplication.domain.usecase.deleteUseCase.useCaseImpl.DeleteUseCaseImpl
-import com.myapplication.domain.usecase.insertUseCase.useCase.InsertUseCase
-import com.myapplication.domain.usecase.insertUseCase.useCaseImpl.InsertUseCaseImpl
+import com.myapplication.domain.usecase.insertUseCase.InsertUseCase
+import com.myapplication.domain.usecase.insertUseCase.InsertUseCaseImpl
 import com.myapplication.domain.usecase.updateUseCase.useCase.UpdateUseCase
 import com.myapplication.domain.usecase.updateUseCase.useCaseImpl.UpdateUseCaseImpl
 import org.koin.dsl.module

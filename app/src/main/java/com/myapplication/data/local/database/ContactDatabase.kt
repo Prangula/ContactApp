@@ -9,7 +9,7 @@ import com.myapplication.data.local.typeconverter.DateConverter
 
 @Database(
     entities = [ContactEntity::class],
-    version = 10
+    version = 12
 )
 @TypeConverters(DateConverter::class)
 abstract class ContactDatabase : RoomDatabase() {

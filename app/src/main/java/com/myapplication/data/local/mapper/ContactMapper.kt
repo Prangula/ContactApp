@@ -1,4 +1,4 @@
-package com.myapplication.data.mapper
+package com.myapplication.data.local.mapper
 
 import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.domain.mapper.EntityMapper
@@ -26,13 +26,5 @@ class ContactMapper : EntityMapper<ContactEntity, Contact> {
                 id
             )
         }
-    }
-
-    fun fromEntityList(initial: List<ContactEntity>): List<Contact> {
-        return initial.map { mapFromEntity(it) }
-    }
-
-    fun toEntityList(initial: List<Contact>): List<ContactEntity> {
-        return initial.map { mapToEntity(it) }
     }
 }

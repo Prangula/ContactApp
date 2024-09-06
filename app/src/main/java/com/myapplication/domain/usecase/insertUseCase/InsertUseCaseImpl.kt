@@ -1,8 +1,7 @@
-package com.myapplication.domain.usecase.insertUseCase.useCaseImpl
+package com.myapplication.domain.usecase.insertUseCase
 
 import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.domain.repository.ContactRepository
-import com.myapplication.domain.usecase.insertUseCase.useCase.InsertUseCase
 
 class InsertUseCaseImpl(private var contactRepository: ContactRepository) : InsertUseCase {
 

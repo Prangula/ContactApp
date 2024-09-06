@@ -1,6 +1,5 @@
 package com.myapplication.presentation.screen.contactsScreen.ui
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
+import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.databinding.FragmentContactsBinding
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
-import com.myapplication.presentation.screen.deleteVm.DeleteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ContactsFragment : Fragment(R.layout.fragment_contacts) {
@@ -38,19 +37,22 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
         rvContacts()
         observer()
         navigateToAddFragment()
-        navigateToEditFragment()
-        deleteDialog()
     }
 
     private fun rvContacts() {
-        adapter = ContactsAdapter()
+        adapter = ContactsAdapter(
+            { items ->
+                navigateToEditFragment(items)
+            },
+            { item ->
+                deleteDialog(item)
+            }
+        )
         binding.rvContact.adapter = adapter
         binding.rvContact.apply {
             layoutManager = LinearLayoutManager(requireActivity())
         }
     }
-
-    @SuppressLint("NotifyDataSetChanged")
     private fun observer() {
         lifecycleScope.launchWhenStarted {
             viewModel.contacts.collect { item ->
@@ -67,33 +69,29 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
         }
     }
 
-    private fun navigateToEditFragment() {
-        adapter.setOnItemClickListener { items ->
-            val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
-            findNavController().navigate(action)
-        }
+    private fun navigateToEditFragment(items: ContactEntity) {
+        val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
+        findNavController().navigate(action)
     }
 
-    private fun deleteDialog() {
-        val deleteViewModel by viewModel<DeleteViewModel>()
-        adapter.setOnLongItemClickListener { item ->
-            val dialog = Dialog(requireActivity())
-            dialog.setContentView(R.layout.alert_dialog)
-            dialog.setCancelable(false)
+    private fun deleteDialog(item: ContactEntity) {
+        val dialog = Dialog(requireActivity())
+        dialog.setContentView(R.layout.alert_dialog)
+        dialog.setCancelable(false)
 
-            val name = dialog.findViewById<TextView>(R.id.alertName)
-            val yes = dialog.findViewById<TextView>(R.id.yes_alert)
-            val no = dialog.findViewById<TextView>(R.id.no_alert)
-            name.text = item.name
+        val name = dialog.findViewById<TextView>(R.id.alertName)
+        val yes = dialog.findViewById<TextView>(R.id.yes_alert)
+        val no = dialog.findViewById<TextView>(R.id.no_alert)
+        name.text = item.name
 
-            yes.setOnClickListener {
-                deleteViewModel.delete(item)
-                dialog.dismiss()
-            }
-            no.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
+        yes.setOnClickListener {
+            // es am viewmodelshi unda gadmovitano
+            viewModel.delete(item)
+            dialog.dismiss()
         }
+        no.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 }

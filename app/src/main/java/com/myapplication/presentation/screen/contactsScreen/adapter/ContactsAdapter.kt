@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.databinding.RvItemBinding
 
-class ContactsAdapter : ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(DiffUtil()) {
+class ContactsAdapter(
+    val onViewClick: (item: ContactEntity) -> Unit,
+    val onViewLongClick: (item: ContactEntity) -> Unit,
+) :
+    ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(DiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = RvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -17,16 +21,11 @@ class ContactsAdapter : ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(D
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
-        // ეს აქ უნდა ჩამესვა?
         holder.itemView.setOnClickListener {
-            onItemClickListener?.let {
-                it(item)
-            }
+            onViewClick.invoke(item)
         }
-        holder.itemView.setOnLongClickListener {
-            onItemLongClickListener?.let {
-                it(item)
-            }
+        holder.itemView.setOnLongClickListener{
+            onViewLongClick.invoke(item)
             true
         }
     }
@@ -41,24 +40,12 @@ class ContactsAdapter : ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(D
         }
     }
 
-    private var onItemClickListener: ((ContactEntity) -> Unit)? = null
-    private var onItemLongClickListener: ((ContactEntity) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (ContactEntity) -> Unit) {
-        onItemClickListener = listener
-    }
-
-    fun setOnLongItemClickListener(listener: (ContactEntity) -> Unit) {
-        onItemLongClickListener = listener
-    }
-
-    class ViewHolder(binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val name = binding.rvName
-        private val number = binding.rvNumber
-
+    class ViewHolder(val binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ContactEntity) {
-            name.text = item.name
-            number.text = item.number
+            with(binding) {
+                rvName.text = item.name
+                rvNumber.text = item.number
+            }
         }
     }
 }

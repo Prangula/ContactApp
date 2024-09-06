@@ -5,13 +5,18 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.myapplication.data.local.dao.ContactDao
 import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.domain.usecase.contactsUseCase.useCase.ContactsUseCase
+import com.myapplication.domain.usecase.deleteUseCase.useCase.DeleteUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ContactsViewModel(private val contactsUseCase: ContactsUseCase) : ViewModel() {
+class ContactsViewModel(
+    private val contactsUseCase: ContactsUseCase,
+    private val deleteUseCase: DeleteUseCase
+) : ViewModel() {
 
     private val _contacts = MutableStateFlow<List<ContactEntity>>(emptyList())
     val contacts = _contacts.asStateFlow()
@@ -35,6 +40,12 @@ class ContactsViewModel(private val contactsUseCase: ContactsUseCase) : ViewMode
         } else {
             rv.visibility = View.GONE
             tv.visibility = View.VISIBLE
+        }
+    }
+
+    fun delete(contactItem: ContactEntity) {
+        viewModelScope.launch {
+            deleteUseCase(contactItem)
         }
     }
 }

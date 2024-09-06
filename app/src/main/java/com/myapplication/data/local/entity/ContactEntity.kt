@@ -12,6 +12,6 @@ data class ContactEntity(
     val name: String = "",
     val number: String = "",
     val date: Date = Date(),
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: Int? = null
 ) : Parcelable

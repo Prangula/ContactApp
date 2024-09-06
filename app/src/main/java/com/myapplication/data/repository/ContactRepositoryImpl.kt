@@ -1,4 +1,4 @@
-package com.myapplication.data.repositoryImpl
+package com.myapplication.data.repository
 
 import com.myapplication.data.local.database.ContactDatabase
 import com.myapplication.data.local.entity.ContactEntity
