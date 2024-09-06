@@ -5,24 +5,21 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.textfield.TextInputLayout
-import com.myapplication.data.local.entity.ContactEntity
+import com.myapplication.domain.domainMapper.ContactUiMapper
 import com.myapplication.domain.usecase.insertUseCase.InsertUseCase
+import com.myapplication.presentation.model.ContactUi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class InsertViewModel(
     private val insertUseCase: InsertUseCase,
-    //private val contactDao: ContactDao
+    private val contactUiMapper: ContactUiMapper
 ) : ViewModel() {
 
-    fun insert(contactEntity: ContactEntity) {
+    fun insert(contactUi: ContactUi) {
         viewModelScope.launch {
-            /*
-            val count = contactDao.avoidDuplication(contactEntity.name, contactEntity.number)
-            if (count != 0) {
-            }
-             */
-            insertUseCase(contactEntity)
+            val item = contactUiMapper.reverse(contactUi)
+            insertUseCase(item)
         }
     }
 

@@ -11,8 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
-import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.databinding.FragmentContactsBinding
+import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -53,6 +53,7 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
             layoutManager = LinearLayoutManager(requireActivity())
         }
     }
+
     private fun observer() {
         lifecycleScope.launchWhenStarted {
             viewModel.contacts.collect { item ->
@@ -69,12 +70,12 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
         }
     }
 
-    private fun navigateToEditFragment(items: ContactEntity) {
+    private fun navigateToEditFragment(items: ContactUi) {
         val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
         findNavController().navigate(action)
     }
 
-    private fun deleteDialog(item: ContactEntity) {
+    private fun deleteDialog(item: ContactUi) {
         val dialog = Dialog(requireActivity())
         dialog.setContentView(R.layout.alert_dialog)
         dialog.setCancelable(false)

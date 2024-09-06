@@ -2,7 +2,7 @@ package com.myapplication.domain.model
 
 import java.util.Date
 
-data class Contact(
+data class ContactDomain(
     val name: String = "",
     val number: String = "",
     val date: Date = Date(),

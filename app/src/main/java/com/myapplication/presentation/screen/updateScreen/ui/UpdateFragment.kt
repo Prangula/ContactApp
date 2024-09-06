@@ -9,8 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.myapplication.R
-import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.databinding.FragmentUpdateBinding
+import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.updateScreen.vm.UpdateViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class UpdateFragment : Fragment(R.layout.fragment_update) {
     private lateinit var binding: FragmentUpdateBinding
     private val viewModel by viewModel<UpdateViewModel>()
-    private lateinit var contactItem: ContactEntity
+    private lateinit var contactItem: ContactUi
     private val args: UpdateFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -47,7 +47,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
                 if (name == contactItem.name && number == contactItem.number) {
                     navigateToHomeFragment()
                 } else if (name.isNotEmpty() && number.isNotEmpty()) {
-                    val item = ContactEntity(name, number, id = contactItem.id)
+                    val item = ContactUi(name, number, id = contactItem.id)
                     viewModel.update(item)
                     navigateToHomeFragment()
                 }

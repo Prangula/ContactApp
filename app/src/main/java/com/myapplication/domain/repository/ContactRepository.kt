@@ -1,15 +1,15 @@
 package com.myapplication.domain.repository
 
-import com.myapplication.data.local.entity.ContactEntity
+import com.myapplication.domain.model.ContactDomain
 import kotlinx.coroutines.flow.Flow
 
 interface ContactRepository {
 
-    suspend fun insert(contactItem: ContactEntity)
+    suspend fun insert(contactDomain: ContactDomain)
 
-    suspend fun update(contactItem: ContactEntity)
+    suspend fun update(contactDomain: ContactDomain)
 
-    suspend fun delete(contactItem: ContactEntity)
+    suspend fun delete(contactDomain: ContactDomain)
 
-    fun getAllContacts(): Flow<List<ContactEntity>>
+    fun getAllContacts(): Flow<List<ContactDomain>>
 }

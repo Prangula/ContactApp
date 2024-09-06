@@ -32,6 +32,7 @@
             app:destination="@id/homeFragment" />
         <argument
             android:name="contact"
-            app:argType="com.myapplication.data.local.entity.ContactEntity" />
+            app:argType="com.myapplication.presentation.model.ContactUi" />
+
     </fragment>
 </navigation>

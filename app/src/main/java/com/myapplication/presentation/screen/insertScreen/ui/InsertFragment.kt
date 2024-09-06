@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.myapplication.R
-import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.databinding.FragmentInsertBinding
+import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.insertScreen.vm.InsertViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,7 +41,7 @@ class InsertFragment : Fragment(R.layout.fragment_insert) {
                     val name = etNameAddContact.text.toString()
                     val number = etNumberAddContact.text.toString()
                     if (name.isNotEmpty() && number.isNotEmpty()) {
-                        val item = ContactEntity(name, number)
+                        val item = ContactUi(name, number)
                         viewModel.insert(item)
                         findNavController().popBackStack(R.id.homeFragment, false)
                     } else {

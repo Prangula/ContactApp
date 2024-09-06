@@ -5,20 +5,21 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
-import com.myapplication.data.local.dao.ContactDao
-import com.myapplication.data.local.entity.ContactEntity
-import com.myapplication.domain.usecase.contactsUseCase.useCase.ContactsUseCase
-import com.myapplication.domain.usecase.deleteUseCase.useCase.DeleteUseCase
+import com.myapplication.domain.domainMapper.ContactUiMapper
+import com.myapplication.domain.usecase.contactsUseCase.ContactsUseCase
+import com.myapplication.domain.usecase.deleteUseCase.DeleteUseCase
+import com.myapplication.presentation.model.ContactUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class ContactsViewModel(
     private val contactsUseCase: ContactsUseCase,
-    private val deleteUseCase: DeleteUseCase
+    private val deleteUseCase: DeleteUseCase,
+    private val contactUiMapper: ContactUiMapper
 ) : ViewModel() {
 
-    private val _contacts = MutableStateFlow<List<ContactEntity>>(emptyList())
+    private val _contacts = MutableStateFlow<List<ContactUi>>(emptyList())
     val contacts = _contacts.asStateFlow()
 
     init {
@@ -28,7 +29,7 @@ class ContactsViewModel(
     private fun getAllContacts() {
         viewModelScope.launch {
             contactsUseCase().collect { item ->
-                _contacts.value = item
+                _contacts.value = item.map { contactUiMapper(it) }
             }
         }
     }
@@ -43,9 +44,10 @@ class ContactsViewModel(
         }
     }
 
-    fun delete(contactItem: ContactEntity) {
+    fun delete(contactUi: ContactUi) {
         viewModelScope.launch {
-            deleteUseCase(contactItem)
+            val item = contactUiMapper.reverse(contactUi)
+            deleteUseCase(item)
         }
     }
 }

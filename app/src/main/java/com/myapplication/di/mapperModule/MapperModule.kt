@@ -1,8 +1,10 @@
 package com.myapplication.di.mapperModule
 
-import com.myapplication.data.local.mapper.ContactMapper
+import com.myapplication.data.local.localMapper.ContactDomainMapper
+import com.myapplication.domain.domainMapper.ContactUiMapper
 import org.koin.dsl.module
 
 val mapperModule = module {
-    single { ContactMapper() }
+    single { ContactDomainMapper() }
+    single { ContactUiMapper() }
 }

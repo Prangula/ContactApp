@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.databinding.RvItemBinding
+import com.myapplication.presentation.model.ContactUi
 
 class ContactsAdapter(
-    val onViewClick: (item: ContactEntity) -> Unit,
-    val onViewLongClick: (item: ContactEntity) -> Unit,
+    val onViewClick: (item: ContactUi) -> Unit,
+    val onViewLongClick: (item: ContactUi) -> Unit,
 ) :
-    ListAdapter<ContactEntity, ContactsAdapter.ViewHolder>(DiffUtil()) {
+    ListAdapter<ContactUi, ContactsAdapter.ViewHolder>(DiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = RvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,24 +24,24 @@ class ContactsAdapter(
         holder.itemView.setOnClickListener {
             onViewClick.invoke(item)
         }
-        holder.itemView.setOnLongClickListener{
+        holder.itemView.setOnLongClickListener {
             onViewLongClick.invoke(item)
             true
         }
     }
 
-    class DiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback<ContactEntity>() {
-        override fun areItemsTheSame(oldItem: ContactEntity, newItem: ContactEntity): Boolean {
+    class DiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback<ContactUi>() {
+        override fun areItemsTheSame(oldItem: ContactUi, newItem: ContactUi): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: ContactEntity, newItem: ContactEntity): Boolean {
+        override fun areContentsTheSame(oldItem: ContactUi, newItem: ContactUi): Boolean {
             return oldItem == newItem
         }
     }
 
     class ViewHolder(val binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ContactEntity) {
+        fun bind(item: ContactUi) {
             with(binding) {
                 rvName.text = item.name
                 rvNumber.text = item.number

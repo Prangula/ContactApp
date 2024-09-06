@@ -1,11 +1,11 @@
-package com.myapplication.domain.usecase.insertUseCase
+package com.myapplication.domain.usecase.deleteUseCase
 
 import com.myapplication.domain.model.ContactDomain
 import com.myapplication.domain.repository.ContactRepository
 
-class InsertUseCaseImpl(private var contactRepository: ContactRepository) : InsertUseCase {
+class DeleteUseCaseImpl(private var contactRepository: ContactRepository) : DeleteUseCase {
 
     override suspend operator fun invoke(contactDomain: ContactDomain) {
-        contactRepository.insert(contactDomain)
+        contactRepository.delete(contactDomain)
     }
 }
