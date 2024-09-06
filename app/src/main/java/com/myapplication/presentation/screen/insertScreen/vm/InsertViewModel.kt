@@ -5,20 +5,20 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.textfield.TextInputLayout
-import com.myapplication.domain.domainMapper.ContactUiMapper
 import com.myapplication.domain.usecase.insertUseCase.InsertUseCase
+import com.myapplication.presentation.mapper.ContactUiToDomainMapper
 import com.myapplication.presentation.model.ContactUi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class InsertViewModel(
     private val insertUseCase: InsertUseCase,
-    private val contactUiMapper: ContactUiMapper
+    private val contactUiToDomainMapper: ContactUiToDomainMapper
 ) : ViewModel() {
 
     fun insert(contactUi: ContactUi) {
         viewModelScope.launch {
-            val item = contactUiMapper.reverse(contactUi)
+            val item = contactUiToDomainMapper.mapModel(contactUi)
             insertUseCase(item)
         }
     }

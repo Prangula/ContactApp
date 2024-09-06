@@ -1,6 +1,9 @@
 package com.myapplication.utils
 
 interface UiMapper<in MODEL_A, out MODEL_B> {
-    operator fun invoke(model: MODEL_A): MODEL_B
-    fun reverse (model: @UnsafeVariance MODEL_B): @UnsafeVariance MODEL_A
+    fun mapModel(model: MODEL_A): MODEL_B
+
+    fun mapToList(modelList: List<MODEL_A>): List<MODEL_B> {
+        return modelList.map { mapModel(it) }
+    }
 }
