@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    single<ContactRepository> { ContactRepositoryImpl(get()) }
+    single<ContactRepository> { ContactRepositoryImpl(get(), get()) }
 
 }
