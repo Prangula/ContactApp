@@ -1,38 +1,24 @@
 package com.myapplication.presentation.screen.updateScreen.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.myapplication.R
 import com.myapplication.databinding.FragmentUpdateBinding
+import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.updateScreen.vm.UpdateViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UpdateFragment : Fragment(R.layout.fragment_update) {
-    private lateinit var binding: FragmentUpdateBinding
-    private val viewModel by viewModel<UpdateViewModel>()
+class UpdateFragment : BaseFragment<FragmentUpdateBinding, UpdateViewModel>(
+    FragmentUpdateBinding::inflate
+) {
+    override val viewModel: UpdateViewModel by viewModel()
     private lateinit var contactItem: ContactUi
     private val args: UpdateFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentUpdateBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onBind() {
         contactItem = args.contact
         binding.etNameEditContact.setText(contactItem.name)
         binding.etNumberEditContact.setText(contactItem.number)
@@ -56,6 +42,6 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
     }
 
     private fun navigateToHomeFragment() {
-        findNavController().popBackStack(R.id.homeFragment, false)
+        viewModel.popStackBack(findNavController(), R.id.homeFragment, false)
     }
 }

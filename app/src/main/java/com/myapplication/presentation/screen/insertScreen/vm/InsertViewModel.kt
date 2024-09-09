@@ -2,10 +2,12 @@ package com.myapplication.presentation.screen.insertScreen.vm
 
 import android.content.Context
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import com.google.android.material.textfield.TextInputLayout
 import com.myapplication.domain.usecase.insertUseCase.InsertUseCase
+import com.myapplication.presentation.base.BaseViewModel
 import com.myapplication.presentation.mapper.ContactUiToDomainMapper
 import com.myapplication.presentation.model.ContactUi
 import kotlinx.coroutines.delay
@@ -14,13 +16,13 @@ import kotlinx.coroutines.launch
 class InsertViewModel(
     private val insertUseCase: InsertUseCase,
     private val contactUiToDomainMapper: ContactUiToDomainMapper
-) : ViewModel() {
+) : BaseViewModel(
+    mapper = contactUiToDomainMapper::mapModel,
+    useCase = { insertUseCase(it) }
+) {
 
     fun insert(contactUi: ContactUi) {
-        viewModelScope.launch {
-            val item = contactUiToDomainMapper.mapModel(contactUi)
-            insertUseCase(item)
-        }
+        baseFun(contactUi)
     }
 
     fun insertError(
@@ -53,5 +55,13 @@ class InsertViewModel(
                     white
                 )
         }
+    }
+
+    override fun navController(navController: NavController, action: NavDirections) {
+        navController.navigate(action)
+    }
+
+    override fun popStackBack(navController: NavController, fragmentId: Int, boolean: Boolean) {
+        navController.popBackStack(fragmentId, boolean)
     }
 }

@@ -21,6 +21,7 @@ class ContactsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+
         holder.itemView.setOnClickListener {
             onViewClick.invoke(item)
         }
