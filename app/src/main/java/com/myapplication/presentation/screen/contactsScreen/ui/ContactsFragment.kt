@@ -1,39 +1,25 @@
 package com.myapplication.presentation.screen.contactsScreen.ui
 
-import android.app.Dialog
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.myapplication.R
 import com.myapplication.databinding.FragmentContactsBinding
+import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
+import com.myapplication.utils.DeleteDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ContactsFragment : Fragment(R.layout.fragment_contacts) {
-    private lateinit var binding: FragmentContactsBinding
+class ContactsFragment :
+    BaseFragment<FragmentContactsBinding, ContactsViewModel>(
+        FragmentContactsBinding::inflate
+    ) {
+    override val viewModel: ContactsViewModel by viewModel()
     private lateinit var adapter: ContactsAdapter
-    private val viewModel by viewModel<ContactsViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentContactsBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onBind() {
         rvContacts()
         observer()
         navigateToAddFragment()
@@ -45,7 +31,7 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
                 navigateToEditFragment(items)
             },
             { item ->
-                deleteDialog(item)
+                DeleteDialog(item, requireActivity(), viewModel).invoke()
             }
         )
         binding.rvContact.adapter = adapter
@@ -58,7 +44,17 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
         lifecycleScope.launchWhenStarted {
             viewModel.contacts.collect { item ->
                 adapter.submitList(item)
-                viewModel.rvVisibility(binding.rvContact, binding.noContacts)
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.emptyContacts.collect { emptyContacts ->
+                if (emptyContacts) {
+                    binding.rvContact.visibility = View.GONE
+                    binding.noContacts.visibility = View.VISIBLE
+                } else {
+                    binding.rvContact.visibility = View.VISIBLE
+                    binding.noContacts.visibility = View.GONE
+                }
             }
         }
     }
@@ -66,33 +62,12 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
     private fun navigateToAddFragment() {
         binding.btnAddContact.setOnClickListener {
             val action = ContactsFragmentDirections.actionHomeFragmentToAddFragment()
-            findNavController().navigate(action)
+            viewModel.navController(findNavController(), action)
         }
     }
 
     private fun navigateToEditFragment(items: ContactUi) {
         val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
-        findNavController().navigate(action)
-    }
-
-    private fun deleteDialog(item: ContactUi) {
-        val dialog = Dialog(requireActivity())
-        dialog.setContentView(R.layout.alert_dialog)
-        dialog.setCancelable(false)
-
-        val name = dialog.findViewById<TextView>(R.id.alertName)
-        val yes = dialog.findViewById<TextView>(R.id.yes_alert)
-        val no = dialog.findViewById<TextView>(R.id.no_alert)
-        name.text = item.name
-
-        yes.setOnClickListener {
-            // es am viewmodelshi unda gadmovitano
-            viewModel.delete(item)
-            dialog.dismiss()
-        }
-        no.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
+        viewModel.navController(findNavController(), action)
     }
 }

@@ -11,6 +11,7 @@ material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.1.4"
 roomRuntime = "2.6.1"
+databindingRuntime = "8.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +27,7 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinAndroidxVi
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-databinding-runtime = { group = "androidx.databinding", name = "databinding-runtime", version.ref = "databindingRuntime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
