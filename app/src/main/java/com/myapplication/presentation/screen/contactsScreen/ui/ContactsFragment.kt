@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
 import com.myapplication.databinding.FragmentContactsBinding
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
-import com.myapplication.utils.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ContactsFragment : Fragment(R.layout.fragment_contacts) {
@@ -48,12 +49,17 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
             }
         )
         binding.rvContact.adapter = adapter
+        binding.rvContact.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+        }
     }
 
     private fun observer() {
-        observe(viewModel.contacts) { item ->
-            adapter.submitList(item)
-            viewModel.rvVisibility(binding.rvContact, binding.noContacts)
+        lifecycleScope.launchWhenStarted {
+            viewModel.contacts.collect { item ->
+                adapter.submitList(item)
+                viewModel.rvVisibility(binding.rvContact, binding.noContacts)
+            }
         }
     }
 

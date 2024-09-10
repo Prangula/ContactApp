@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.presentation.mapper.ContactDomainToUiMapper
 import com.myapplication.domain.usecase.contactsUseCase.ContactsUseCase
+import com.myapplication.domain.usecase.deleteUseCase.DeleteUseCase
 import com.myapplication.presentation.mapper.ContactUiToDomainMapper
 import com.myapplication.presentation.model.ContactUi
 import kotlinx.coroutines.flow.MutableStateFlow
