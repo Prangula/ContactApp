@@ -1,7 +1,6 @@
 package com.myapplication.data.repository
 
 import com.myapplication.data.local.database.ContactDatabase
-import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.data.local.mapper.ContactEntityToDomainMapper
 import com.myapplication.data.local.mapper.ContactDomainToEntityMapper
 import com.myapplication.domain.model.ContactDomain
@@ -28,7 +27,7 @@ class ContactRepositoryImpl(
     }
 
     override fun getAllContacts(): Flow<List<ContactDomain>> {
-       return db.contactDao().getAllContacts().map { contactsList ->
+        return db.contactDao().getAllContacts().map { contactsList ->
             contactEntityToDomainMapper.mapToList(contactsList)
         }
     }

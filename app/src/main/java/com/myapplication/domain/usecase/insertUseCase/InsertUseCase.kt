@@ -1,8 +1,12 @@
 package com.myapplication.domain.usecase.insertUseCase
 
-import com.myapplication.data.local.entity.ContactEntity
 import com.myapplication.domain.model.ContactDomain
+import com.myapplication.domain.repository.ContactRepository
+import com.myapplication.domain.usecase.base.BaseUseCase
 
-interface InsertUseCase {
-    suspend operator fun invoke(contactDomain: ContactDomain)
+class InsertUseCase(private var contactRepository: ContactRepository) :
+    BaseUseCase<ContactDomain, Unit>() {
+    override suspend fun invoke(params: ContactDomain?) {
+        contactRepository.insert(params!!)
+    }
 }
