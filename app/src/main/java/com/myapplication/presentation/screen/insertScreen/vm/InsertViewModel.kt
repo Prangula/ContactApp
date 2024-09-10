@@ -3,8 +3,6 @@ package com.myapplication.presentation.screen.insertScreen.vm
 import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
 import com.google.android.material.textfield.TextInputLayout
 import com.myapplication.domain.usecase.insertUseCase.InsertUseCase
 import com.myapplication.presentation.base.BaseViewModel
@@ -55,13 +53,5 @@ class InsertViewModel(
                     white
                 )
         }
-    }
-
-    override fun navController(navController: NavController, action: NavDirections) {
-        navController.navigate(action)
-    }
-
-    override fun popStackBack(navController: NavController, fragmentId: Int, boolean: Boolean) {
-        navController.popBackStack(fragmentId, boolean)
     }
 }

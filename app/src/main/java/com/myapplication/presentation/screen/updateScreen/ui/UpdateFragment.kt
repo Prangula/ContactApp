@@ -1,22 +1,21 @@
 package com.myapplication.presentation.screen.updateScreen.ui
 
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.myapplication.R
 import com.myapplication.databinding.FragmentUpdateBinding
 import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.updateScreen.vm.UpdateViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
 class UpdateFragment : BaseFragment<FragmentUpdateBinding, UpdateViewModel>(
     FragmentUpdateBinding::inflate
 ) {
-    override val viewModel: UpdateViewModel by viewModel()
     private lateinit var contactItem: ContactUi
     private val args: UpdateFragmentArgs by navArgs()
+    override val viewModelClass: KClass<UpdateViewModel> = UpdateViewModel::class
 
     override fun onBind() {
         contactItem = args.contact
@@ -42,6 +41,6 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding, UpdateViewModel>(
     }
 
     private fun navigateToHomeFragment() {
-        viewModel.popStackBack(findNavController(), R.id.homeFragment, false)
+        viewModel.backNavigation()
     }
 }

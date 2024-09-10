@@ -1,8 +1,6 @@
 package com.myapplication.presentation.screen.contactsScreen.vm
 
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
 import com.myapplication.presentation.mapper.ContactDomainToUiMapper
 import com.myapplication.domain.usecase.contactsUseCase.ContactsUseCase
 import com.myapplication.domain.usecase.deleteUseCase.DeleteUseCase
@@ -43,13 +41,5 @@ class ContactsViewModel(
 
     fun delete(contactUi: ContactUi) {
         baseFun(contactUi)
-    }
-
-    override fun navController(navController: NavController, action: NavDirections) {
-        navController.navigate(action)
-    }
-
-    override fun popStackBack(navController: NavController, fragmentId: Int, boolean: Boolean) {
-        navController.popBackStack(fragmentId, boolean)
     }
 }

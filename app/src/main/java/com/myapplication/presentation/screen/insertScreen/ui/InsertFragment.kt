@@ -1,19 +1,18 @@
 package com.myapplication.presentation.screen.insertScreen.ui
 
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.myapplication.R
 import com.myapplication.databinding.FragmentInsertBinding
 import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.insertScreen.vm.InsertViewModel
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
 class InsertFragment : BaseFragment<FragmentInsertBinding, InsertViewModel>(
     FragmentInsertBinding::inflate
 ) {
-    override val viewModel: InsertViewModel by viewModel()
+    override val viewModelClass: KClass<InsertViewModel> = InsertViewModel::class
 
     override fun onBind() {
         insert()
@@ -28,7 +27,7 @@ class InsertFragment : BaseFragment<FragmentInsertBinding, InsertViewModel>(
                     if (name.isNotEmpty() && number.isNotEmpty()) {
                         val item = ContactUi(name, number)
                         viewModel.insert(item)
-                        viewModel.popStackBack(findNavController(), R.id.homeFragment, false)
+                        viewModel.backNavigation()
                     } else {
                         viewModel.insertError(
                             etInput1AddContact,

@@ -2,7 +2,6 @@ package com.myapplication.presentation.screen.contactsScreen.ui
 
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.databinding.FragmentContactsBinding
 import com.myapplication.presentation.base.BaseFragment
@@ -10,14 +9,15 @@ import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
 import com.myapplication.utils.DeleteDialog
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.myapplication.utils.emptyObserve
+import kotlin.reflect.KClass
 
 class ContactsFragment :
     BaseFragment<FragmentContactsBinding, ContactsViewModel>(
         FragmentContactsBinding::inflate
     ) {
-    override val viewModel: ContactsViewModel by viewModel()
     private lateinit var adapter: ContactsAdapter
+    override val viewModelClass: KClass<ContactsViewModel> = ContactsViewModel::class
 
     override fun onBind() {
         rvContacts()
@@ -46,15 +46,13 @@ class ContactsFragment :
                 adapter.submitList(item)
             }
         }
-        lifecycleScope.launchWhenStarted {
-            viewModel.emptyContacts.collect { emptyContacts ->
-                if (emptyContacts) {
-                    binding.rvContact.visibility = View.GONE
-                    binding.noContacts.visibility = View.VISIBLE
-                } else {
-                    binding.rvContact.visibility = View.VISIBLE
-                    binding.noContacts.visibility = View.GONE
-                }
+        emptyObserve(viewModel.emptyContacts) { emptyContacts ->
+            if (emptyContacts) {
+                binding.rvContact.visibility = View.GONE
+                binding.noContacts.visibility = View.VISIBLE
+            } else {
+                binding.rvContact.visibility = View.VISIBLE
+                binding.noContacts.visibility = View.GONE
             }
         }
     }
@@ -62,12 +60,12 @@ class ContactsFragment :
     private fun navigateToAddFragment() {
         binding.btnAddContact.setOnClickListener {
             val action = ContactsFragmentDirections.actionHomeFragmentToAddFragment()
-            viewModel.navController(findNavController(), action)
+            viewModel.navController(action)
         }
     }
 
     private fun navigateToEditFragment(items: ContactUi) {
         val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
-        viewModel.navController(findNavController(), action)
+        viewModel.navController(action)
     }
 }
