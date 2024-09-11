@@ -1,15 +1,17 @@
 package com.myapplication.presentation.screen.contactsScreen.ui
 
+import android.app.Dialog
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.myapplication.R
 import com.myapplication.databinding.FragmentContactsBinding
 import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
-import com.myapplication.utils.DeleteDialog
-import com.myapplication.utils.emptyObserve
+import com.myapplication.utils.emptyObserveExtension
 import kotlin.reflect.KClass
 
 class ContactsFragment :
@@ -31,7 +33,7 @@ class ContactsFragment :
                 navigateToEditFragment(items)
             },
             { item ->
-                DeleteDialog(item, requireActivity(), viewModel).invoke()
+                delete(item)
             }
         )
         binding.rvContact.adapter = adapter
@@ -46,7 +48,7 @@ class ContactsFragment :
                 adapter.submitList(item)
             }
         }
-        emptyObserve(viewModel.emptyContacts) { emptyContacts ->
+        emptyObserveExtension(viewModel.emptyContacts) { emptyContacts ->
             if (emptyContacts) {
                 binding.rvContact.visibility = View.GONE
                 binding.noContacts.visibility = View.VISIBLE
@@ -60,12 +62,32 @@ class ContactsFragment :
     private fun navigateToAddFragment() {
         binding.btnAddContact.setOnClickListener {
             val action = ContactsFragmentDirections.actionHomeFragmentToAddFragment()
-            viewModel.navController(action)
+            viewModel.navigateTo(action)
         }
     }
 
     private fun navigateToEditFragment(items: ContactUi) {
         val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
-        viewModel.navController(action)
+        viewModel.navigateTo(action)
+    }
+
+    private fun delete(contactUi: ContactUi) {
+        val dialog = Dialog(requireActivity())
+        dialog.setContentView(R.layout.alert_dialog)
+        dialog.setCancelable(false)
+
+        val name = dialog.findViewById<TextView>(R.id.alertName)
+        val yes = dialog.findViewById<TextView>(R.id.yes_alert)
+        val no = dialog.findViewById<TextView>(R.id.no_alert)
+        name.text = contactUi.name
+
+        yes.setOnClickListener {
+            viewModel.delete(contactUi)
+            dialog.dismiss()
+        }
+        no.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 }

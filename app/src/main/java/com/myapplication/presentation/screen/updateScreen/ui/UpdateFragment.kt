@@ -7,7 +7,6 @@ import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.updateScreen.vm.UpdateViewModel
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.reflect.KClass
 
 class UpdateFragment : BaseFragment<FragmentUpdateBinding, UpdateViewModel>(
@@ -41,6 +40,6 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding, UpdateViewModel>(
     }
 
     private fun navigateToHomeFragment() {
-        viewModel.backNavigation()
+        viewModel.navigateBack()
     }
 }

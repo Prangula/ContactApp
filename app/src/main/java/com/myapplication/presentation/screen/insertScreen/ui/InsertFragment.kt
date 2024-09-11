@@ -27,7 +27,7 @@ class InsertFragment : BaseFragment<FragmentInsertBinding, InsertViewModel>(
                     if (name.isNotEmpty() && number.isNotEmpty()) {
                         val item = ContactUi(name, number)
                         viewModel.insert(item)
-                        viewModel.backNavigation()
+                        viewModel.navigateBack()
                     } else {
                         viewModel.insertError(
                             etInput1AddContact,

@@ -7,6 +7,7 @@ import com.myapplication.domain.usecase.deleteUseCase.DeleteUseCase
 import com.myapplication.presentation.base.BaseViewModel
 import com.myapplication.presentation.mapper.ContactUiToDomainMapper
 import com.myapplication.presentation.model.ContactUi
+import com.myapplication.utils.viewModelExtension
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,10 +19,7 @@ class ContactsViewModel(
     private val deleteUseCase: DeleteUseCase,
     private val contactDomainToUiMapper: ContactDomainToUiMapper,
     private val contactUiToDomainMapper: ContactUiToDomainMapper,
-) : BaseViewModel(
-    mapper = contactUiToDomainMapper::mapModel,
-    useCase = { deleteUseCase(it) }
-) {
+) : BaseViewModel() {
 
     private val _contacts = MutableStateFlow<List<ContactUi>>(emptyList())
     val contacts = _contacts.asStateFlow()
@@ -40,6 +38,7 @@ class ContactsViewModel(
     }
 
     fun delete(contactUi: ContactUi) {
-        baseFun(contactUi)
+        viewModelExtension(contactUi, { contactUiToDomainMapper.mapModel(it) }, { deleteUseCase })
+
     }
 }
