@@ -7,7 +7,8 @@ import com.myapplication.domain.usecase.deleteUseCase.DeleteUseCase
 import com.myapplication.presentation.base.BaseViewModel
 import com.myapplication.presentation.mapper.ContactUiToDomainMapper
 import com.myapplication.presentation.model.ContactUi
-import com.myapplication.utils.viewModelExtension
+import com.myapplication.presentation.screen.contactsScreen.ui.ContactsFragmentDirections
+import com.myapplication.utils.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -38,7 +39,19 @@ class ContactsViewModel(
     }
 
     fun delete(contactUi: ContactUi) {
-        viewModelExtension(contactUi, { contactUiToDomainMapper.mapModel(it) }, { deleteUseCase })
+        val mappedItem = contactUiToDomainMapper.mapModel(contactUi)
+        viewModelScope(mappedItem) {
+            deleteUseCase(mappedItem)
+        }
+    }
 
+    fun navigateToAddFragment() {
+        val action = ContactsFragmentDirections.actionHomeFragmentToAddFragment()
+        navigateTo(action)
+    }
+
+    fun navigateToEditFragment(contactUi: ContactUi) {
+        val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(contactUi)
+        navigateTo(action)
     }
 }

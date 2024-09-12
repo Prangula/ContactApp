@@ -11,7 +11,7 @@ import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
-import com.myapplication.utils.emptyObserveExtension
+import com.myapplication.utils.observe
 import kotlin.reflect.KClass
 
 class ContactsFragment :
@@ -29,8 +29,8 @@ class ContactsFragment :
 
     private fun rvContacts() {
         adapter = ContactsAdapter(
-            { items ->
-                navigateToEditFragment(items)
+            { item ->
+                navigateToEditFragment(item)
             },
             { item ->
                 delete(item)
@@ -48,7 +48,7 @@ class ContactsFragment :
                 adapter.submitList(item)
             }
         }
-        emptyObserveExtension(viewModel.emptyContacts) { emptyContacts ->
+        observe(viewModel.emptyContacts) { emptyContacts ->
             if (emptyContacts) {
                 binding.rvContact.visibility = View.GONE
                 binding.noContacts.visibility = View.VISIBLE
@@ -61,14 +61,12 @@ class ContactsFragment :
 
     private fun navigateToAddFragment() {
         binding.btnAddContact.setOnClickListener {
-            val action = ContactsFragmentDirections.actionHomeFragmentToAddFragment()
-            viewModel.navigateTo(action)
+            viewModel.navigateToAddFragment()
         }
     }
 
-    private fun navigateToEditFragment(items: ContactUi) {
-        val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(items)
-        viewModel.navigateTo(action)
+    private fun navigateToEditFragment(contactUi: ContactUi) {
+        viewModel.navigateToEditFragment(contactUi)
     }
 
     private fun delete(contactUi: ContactUi) {

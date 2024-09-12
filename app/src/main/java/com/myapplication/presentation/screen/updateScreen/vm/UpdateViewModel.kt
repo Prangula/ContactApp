@@ -4,7 +4,7 @@ import com.myapplication.domain.usecase.updateUseCase.UpdateUseCase
 import com.myapplication.presentation.base.BaseViewModel
 import com.myapplication.presentation.mapper.ContactUiToDomainMapper
 import com.myapplication.presentation.model.ContactUi
-import com.myapplication.utils.viewModelExtension
+import com.myapplication.utils.viewModelScope
 
 class UpdateViewModel(
     private val updateUseCase: UpdateUseCase,
@@ -12,6 +12,9 @@ class UpdateViewModel(
 ) : BaseViewModel() {
 
     fun update(contactUi: ContactUi) {
-        viewModelExtension(contactUi, { contactUiToDomainMapper.mapModel(it) }, { updateUseCase })
+        val mappedItem = contactUiToDomainMapper.mapModel(contactUi)
+        viewModelScope(mappedItem) {
+            updateUseCase(mappedItem)
+        }
     }
 }

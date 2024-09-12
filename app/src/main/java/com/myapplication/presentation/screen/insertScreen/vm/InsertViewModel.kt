@@ -8,7 +8,7 @@ import com.myapplication.domain.usecase.insertUseCase.InsertUseCase
 import com.myapplication.presentation.base.BaseViewModel
 import com.myapplication.presentation.mapper.ContactUiToDomainMapper
 import com.myapplication.presentation.model.ContactUi
-import com.myapplication.utils.viewModelExtension
+import com.myapplication.utils.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -18,11 +18,10 @@ class InsertViewModel(
 ) : BaseViewModel() {
 
     fun insert(contactUi: ContactUi) {
-        viewModelExtension(
-            item = contactUi,
-            mapper = { contactUiToDomainMapper.mapModel(it) },
-            useCase = { insertUseCase }
-        )
+        val mappedItem = contactUiToDomainMapper.mapModel(contactUi)
+        viewModelScope(mappedItem) {
+            insertUseCase(mappedItem)
+        }
     }
 
     fun insertError(
