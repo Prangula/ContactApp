@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.myapplication.utils.NavigationCommand
+import com.myapplication.utils.lifeCycleScope
 import org.koin.androidx.viewmodel.ext.android.viewModelForClass
 import kotlin.reflect.KClass
 
@@ -39,12 +39,11 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
     protected abstract fun onBind()
 
     private fun observeNavigationCommands() {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+        lifeCycleScope {
             viewModel.navigation.collect { command ->
                 when (command) {
                     is NavigationCommand.ToDirection -> findNavController().navigate(command.directions)
                     is NavigationCommand.Back -> findNavController().popBackStack()
-                    else -> {}
                 }
             }
         }

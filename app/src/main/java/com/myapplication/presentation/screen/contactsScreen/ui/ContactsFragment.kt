@@ -1,11 +1,8 @@
 package com.myapplication.presentation.screen.contactsScreen.ui
 
-import android.app.Dialog
 import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.myapplication.R
 import com.myapplication.databinding.FragmentContactsBinding
 import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
@@ -28,17 +25,20 @@ class ContactsFragment :
     }
 
     private fun rvContacts() {
-        adapter = ContactsAdapter(
-            { item ->
-                navigateToEditFragment(item)
-            },
-            { item ->
-                delete(item)
+        with(binding) {
+            adapter = ContactsAdapter(
+                { item ->
+                    navigateToEditFragment(item)
+                }
+            ) { item ->
+                deleteCustomView.delete(item) {
+                    viewModel.delete(item)
+                }
             }
-        )
-        binding.rvContact.adapter = adapter
-        binding.rvContact.apply {
-            layoutManager = LinearLayoutManager(requireActivity())
+            rvContact.adapter = adapter
+            rvContact.apply {
+                layoutManager = LinearLayoutManager(requireActivity())
+            }
         }
     }
 
@@ -67,25 +67,5 @@ class ContactsFragment :
 
     private fun navigateToEditFragment(contactUi: ContactUi) {
         viewModel.navigateToEditFragment(contactUi)
-    }
-
-    private fun delete(contactUi: ContactUi) {
-        val dialog = Dialog(requireActivity())
-        dialog.setContentView(R.layout.alert_dialog)
-        dialog.setCancelable(false)
-
-        val name = dialog.findViewById<TextView>(R.id.alertName)
-        val yes = dialog.findViewById<TextView>(R.id.yes_alert)
-        val no = dialog.findViewById<TextView>(R.id.no_alert)
-        name.text = contactUi.name
-
-        yes.setOnClickListener {
-            viewModel.delete(contactUi)
-            dialog.dismiss()
-        }
-        no.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
     }
 }

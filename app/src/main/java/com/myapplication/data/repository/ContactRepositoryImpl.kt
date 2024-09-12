@@ -28,7 +28,7 @@ class ContactRepositoryImpl(
     }
 
     override fun getAllContacts(): Flow<List<ContactDomain>> {
-       return db.contactDao().getAllContacts().map { contactsList ->
+        return db.contactDao().getAllContacts().map { contactsList ->
             contactEntityToDomainMapper.mapToList(contactsList)
         }
     }

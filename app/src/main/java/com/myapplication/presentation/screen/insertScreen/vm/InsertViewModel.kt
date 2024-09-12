@@ -19,7 +19,7 @@ class InsertViewModel(
 
     fun insert(contactUi: ContactUi) {
         val mappedItem = contactUiToDomainMapper.mapModel(contactUi)
-        viewModelScope(mappedItem) {
+        viewModelScope {
             insertUseCase(mappedItem)
         }
     }

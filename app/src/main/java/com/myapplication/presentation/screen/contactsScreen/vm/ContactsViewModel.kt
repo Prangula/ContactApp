@@ -40,18 +40,16 @@ class ContactsViewModel(
 
     fun delete(contactUi: ContactUi) {
         val mappedItem = contactUiToDomainMapper.mapModel(contactUi)
-        viewModelScope(mappedItem) {
+        viewModelScope {
             deleteUseCase(mappedItem)
         }
     }
 
     fun navigateToAddFragment() {
-        val action = ContactsFragmentDirections.actionHomeFragmentToAddFragment()
-        navigateTo(action)
+        navigateTo(ContactsFragmentDirections.actionHomeFragmentToAddFragment())
     }
 
     fun navigateToEditFragment(contactUi: ContactUi) {
-        val action = ContactsFragmentDirections.actionHomeFragmentToEditFragment(contactUi)
-        navigateTo(action)
+        navigateTo(ContactsFragmentDirections.actionHomeFragmentToEditFragment(contactUi))
     }
 }

@@ -13,7 +13,7 @@ class UpdateViewModel(
 
     fun update(contactUi: ContactUi) {
         val mappedItem = contactUiToDomainMapper.mapModel(contactUi)
-        viewModelScope(mappedItem) {
+        viewModelScope {
             updateUseCase(mappedItem)
         }
     }
