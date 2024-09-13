@@ -1,21 +1,35 @@
 package com.myapplication.data.repository
 
-import com.myapplication.data.database.database.ContactDatabase
-import com.myapplication.data.database.entity.ContactEntity
+import com.myapplication.data.local.database.ContactDatabase
+import com.myapplication.data.local.entity.ContactEntity
+import com.myapplication.data.local.mapper.ContactEntityToDomainMapper
+import com.myapplication.data.local.mapper.ContactDomainToEntityMapper
+import com.myapplication.domain.model.ContactDomain
+import com.myapplication.domain.repository.ContactRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class ContactRepositoryImpl(private val db: ContactDatabase) {
+class ContactRepositoryImpl(
+    private val db: ContactDatabase,
+    private val contactDomainToEntityMapper: ContactDomainToEntityMapper,
+    private val contactEntityToDomainMapper: ContactEntityToDomainMapper
+) : ContactRepository {
 
-    suspend fun insert(contactItem: ContactEntity) =
-        db.contactDao().insert(contactItem)
-
-    suspend fun update(contactItem: ContactEntity) =
-        db.contactDao().update(contactItem)
-
-    suspend fun delete(contactItem: ContactEntity) {
-        db.contactDao().delete(contactItem)
+    override suspend fun insert(contactDomain: ContactDomain) {
+        db.contactDao().insert(contactDomainToEntityMapper.mapModel(contactDomain))
     }
 
-    fun getAllContacts() =
-        db.contactDao().getAllContacts()
-}
+    override suspend fun update(contactDomain: ContactDomain) {
+        db.contactDao().update(contactDomainToEntityMapper.mapModel(contactDomain))
+    }
 
+    override suspend fun delete(contactDomain: ContactDomain) {
+        db.contactDao().delete(contactDomainToEntityMapper.mapModel(contactDomain))
+    }
+
+    override fun getAllContacts(): Flow<List<ContactDomain>> {
+       return db.contactDao().getAllContacts().map { contactsList ->
+            contactEntityToDomainMapper.mapToList(contactsList)
+        }
+    }
+}
