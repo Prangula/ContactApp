@@ -12,7 +12,8 @@ import kotlin.reflect.KClass
 class InsertFragment : BaseFragment<FragmentInsertBinding, InsertViewModel>(
     FragmentInsertBinding::inflate
 ) {
-    override val viewModelClass: KClass<InsertViewModel> = InsertViewModel::class
+    override val viewModelClass: KClass<InsertViewModel>
+        get() = InsertViewModel::class
 
     override fun onBind() {
         insert()

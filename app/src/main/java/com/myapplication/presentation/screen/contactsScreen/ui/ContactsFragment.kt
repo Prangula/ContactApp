@@ -8,6 +8,7 @@ import com.myapplication.presentation.base.BaseFragment
 import com.myapplication.presentation.model.ContactUi
 import com.myapplication.presentation.screen.contactsScreen.adapter.ContactsAdapter
 import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
+import com.myapplication.utils.DeleteCustomView
 import com.myapplication.utils.observe
 import kotlin.reflect.KClass
 
@@ -16,7 +17,8 @@ class ContactsFragment :
         FragmentContactsBinding::inflate
     ) {
     private lateinit var adapter: ContactsAdapter
-    override val viewModelClass: KClass<ContactsViewModel> = ContactsViewModel::class
+    override val viewModelClass: KClass<ContactsViewModel>
+        get() = ContactsViewModel::class
 
     override fun onBind() {
         rvContacts()
@@ -31,7 +33,7 @@ class ContactsFragment :
                     navigateToEditFragment(item)
                 }
             ) { item ->
-                deleteCustomView.delete(item) {
+                DeleteCustomView(requireActivity()).delete(item) {
                     viewModel.delete(item)
                 }
             }

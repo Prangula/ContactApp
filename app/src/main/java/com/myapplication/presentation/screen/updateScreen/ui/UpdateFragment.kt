@@ -14,7 +14,8 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding, UpdateViewModel>(
 ) {
     private lateinit var contactItem: ContactUi
     private val args: UpdateFragmentArgs by navArgs()
-    override val viewModelClass: KClass<UpdateViewModel> = UpdateViewModel::class
+    override val viewModelClass: KClass<UpdateViewModel>
+        get() = UpdateViewModel::class
 
     override fun onBind() {
         contactItem = args.contact

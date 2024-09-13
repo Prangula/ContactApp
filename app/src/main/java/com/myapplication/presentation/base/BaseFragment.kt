@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.myapplication.utils.lifeCycleScope
 import androidx.viewbinding.ViewBinding
 import com.myapplication.utils.NavigationCommand
-import com.myapplication.utils.lifeCycleScope
 import org.koin.androidx.viewmodel.ext.android.viewModelForClass
 import kotlin.reflect.KClass
 
@@ -19,7 +19,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
     abstract val viewModelClass: KClass<VM>
-    protected open val viewModel: VM by viewModelForClass(clazz = viewModelClass)
+    protected val viewModel: VM by viewModelForClass(clazz = viewModelClass)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,8 +42,11 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
         lifeCycleScope {
             viewModel.navigation.collect { command ->
                 when (command) {
-                    is NavigationCommand.ToDirection -> findNavController().navigate(command.directions)
-                    is NavigationCommand.Back -> findNavController().popBackStack()
+                    is NavigationCommand.ToDirection ->
+                        findNavController().navigate(command.directions)
+
+                    is NavigationCommand.Back ->
+                        findNavController().navigateUp()
                 }
             }
         }

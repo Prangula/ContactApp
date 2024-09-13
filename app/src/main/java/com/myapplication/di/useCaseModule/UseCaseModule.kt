@@ -11,7 +11,6 @@ import com.myapplication.domain.usecase.updateUseCase.UpdateUseCaseImpl
 import org.koin.dsl.module
 
 val useCaseModule = module {
-
     single<InsertUseCase> { InsertUseCaseImpl(get()) }
     single<UpdateUseCase> { UpdateUseCaseImpl(get()) }
     single<DeleteUseCase> { DeleteUseCaseImpl(get()) }

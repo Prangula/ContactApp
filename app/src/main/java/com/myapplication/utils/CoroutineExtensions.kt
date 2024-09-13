@@ -1,5 +1,6 @@
 package com.myapplication.utils
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -25,8 +26,10 @@ fun ViewModel.viewModelScope(
     viewModelScope.launch { action() }
 }
 
-fun LifecycleOwner.lifeCycleScope(
+fun Fragment.lifeCycleScope(
     action: suspend CoroutineScope.() -> Unit
-) {
-    lifecycleScope.launch { action() }
+){
+    viewLifecycleOwner.lifecycleScope.launch {
+        action()
+    }
 }

@@ -5,7 +5,5 @@ import com.myapplication.domain.repository.ContactRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-
     single<ContactRepository> { ContactRepositoryImpl(get(), get(), get()) }
-
 }

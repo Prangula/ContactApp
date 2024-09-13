@@ -3,13 +3,8 @@ package com.myapplication.utils
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.util.AttributeSet
-import android.view.LayoutInflater
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.myapplication.R
 import com.myapplication.databinding.AlertDialogBinding
 import com.myapplication.presentation.model.ContactUi
-import com.myapplication.presentation.screen.contactsScreen.vm.ContactsViewModel
 
 @SuppressLint("ViewConstructor")
 class DeleteCustomView @JvmOverloads constructor(
@@ -19,7 +14,7 @@ class DeleteCustomView @JvmOverloads constructor(
 
     fun delete(contactUi: ContactUi, deleteClickedYes: () -> Unit) {
         val dialog = Dialog(context)
-        dialog.setContentView(R.layout.alert_dialog)
+        dialog.setContentView(binding.root)
         dialog.setCancelable(false)
 
         with(binding) {

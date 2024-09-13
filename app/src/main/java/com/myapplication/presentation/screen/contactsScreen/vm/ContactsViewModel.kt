@@ -46,10 +46,10 @@ class ContactsViewModel(
     }
 
     fun navigateToAddFragment() {
-        navigateTo(ContactsFragmentDirections.actionHomeFragmentToAddFragment())
+        navigateTo(ContactsFragmentDirections.actionContactsFragmentToInsertFragment())
     }
 
     fun navigateToEditFragment(contactUi: ContactUi) {
-        navigateTo(ContactsFragmentDirections.actionHomeFragmentToEditFragment(contactUi))
+        navigateTo(ContactsFragmentDirections.actionContactsFragmentToUpdateFragment(contactUi))
     }
 }
